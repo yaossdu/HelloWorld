@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzt.tapm.mapper.UserMapper">
+    <select id="selectUserByUsername" resultType="com.wzt.tapm.entity.UserBean" parameterType="String">
+        SELECT * FROM user_info where username = #{username}
+    </select>
+
+    <select id="selectEmailByUsername" resultType="String" parameterType="String">
+        SELECT email FROM user_info where username = #{username}
+    </select>
+
+    <insert id="insertUser" parameterType="com.wzt.tapm.entity.UserBean">
+       INSERT INTO user_info(username,password,email,`identity`) values (#{username},#{password},#{email},#{identity})
+    </insert>
+
+    <update id="updatePasswordByUsername" parameterType="String">
+        UPDATE user_info set password = #{new_password} where username = #{username}
+    </update>
+
+    <select id="selectUserInfoByUsername" resultType="map" parameterType="String">
+        SELECT username,email,`identity`  FROM user_info where username = #{username}
+    </select>
+
+    <select id="selectTechnicalName" resultType="String">
+        SELECT username FROM user_info where `identity` = 2
+    </select>
+
+</mapper>
